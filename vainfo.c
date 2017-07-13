@@ -109,19 +109,19 @@ void va_close_display_x11(VADisplay va_dpy)
     if (!x11_display)
         return;
 
-    XCloseDisplay(x11_display);
+    XCloseDisplay((Display*)x11_display);
     x11_display = NULL;
 
 }
 
 static VADisplay va_open_display_x11(void)
 {
-    x11_display = XOpenDisplay(NULL);
+    x11_display = (VADisplay*)XOpenDisplay(NULL);
     if (!x11_display) {
        fprintf(stderr, "error: can't connect X server!\n");\
        return NULL;
     }
-    return vaGetDisplay(x11_display);
+    return vaGetDisplay((Display*)x11_display);
 }
 
 VADisplay va_open_display(void)
